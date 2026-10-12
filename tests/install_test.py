@@ -246,6 +246,9 @@ def errors():
     dev = FakeFM1(image, identity="XY-9_001", name="usb-midi")
     rc, out, err = cli([p, "--yes"], dev)
     ok(rc == 6 and dev.upgrades == 0, "another model -> exit 6, nothing sent")
+    dev = FakeFM1(image, identity="ota-SMK-37 Pro_900", name="Felucca Update")
+    rc, out, err = cli([p, "--yes"], dev)
+    ok(rc == 6 and dev.upgrades == 0, "FM-1 package on an SMK in update mode -> exit 6 (wrong model), nothing sent")
 
     class Stuck(FakeFM1):          # the loader never shows up
         def boot(self, identity, name):
