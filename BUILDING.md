@@ -57,13 +57,13 @@ the break bank from one-bar WAVs instead (`tools/import_breaks.py` makes such a 
 BB Gen's samples, in `build/breaks/`); see README.md, Breaks. It fails if a soft-double routine is
 linked (a `double` crept in) and checks the image, RAM and pool sizes.
 
-### M-Vave SMK-37 Pro (X0X37)
+### M-Vave SMK-37 (X0X37)
 
 ```
 BOARD=smk37 ./build.sh          # or: ./build.sh --board smk37  ->  build/x0x-smk37.fwsc
 ```
 
-The same sources for the M-Vave SMK-37 Pro (same AC791N chip, SPL and update loader; a different panel).
+The same sources for the M-Vave SMK-37 (same AC791N chip, SPL and update loader; a different panel).
 Every difference is behind `BOARD_SMK37` (C, default 0), which only this build sets (`-DBOARD_SMK37=1`,
 for the app and the update loader). The plain `./build.sh` is unchanged: its `build/x0x.bin`,
 `build/loader/ota.bin` and `build/x0x.fwsc` stay byte for byte what they were before the SMK port.
@@ -85,7 +85,7 @@ The SMK build keeps its objects, app and loader in `build/smk37/` and writes the
 - the LCD's SPI clock: 12 MHz, the stock firmware's rate (`X0X_SMK_LCD_BAUD=n` tries 60 MHz / (n + 1); the
   FM-1 build runs it at 60 MHz).
 
-Store owner: several FM-1 firmwares are ported to the SMK-37 Pro with the same board layer and the same
+Store owner: several FM-1 firmwares are ported to the SMK-37 with the same board layer and the same
 store area. The SMK build tags the store with its family (`FELUCCA_DATA_FAMILY`, default `X0X`); at boot a
 store tagged by another firmware, or not tagged (`FELUCCA_DATA_UNTAGGED_OK`, default `0`), is cleared
 before X0X reads it. Samples, calibration, Bluetooth pairing and key_mac are never touched.

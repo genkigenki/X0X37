@@ -1,7 +1,7 @@
-# X0X37: X0X for the M-Vave SMK-37 Pro
+# X0X37: X0X for the M-Vave SMK-37
 
 **X0X37** is a port of **X0X**, the groovebox firmware for the M-Vave FM-1 by
-[Charles Vestal](https://github.com/charlesvestal/fm1-x0x), to the **M-Vave SMK-37 Pro** keyboard (same
+[Charles Vestal](https://github.com/charlesvestal/fm1-x0x), to the **M-Vave SMK-37** keyboard (SMK-37 Pro, Elite or MKE-P37; same
 JieLi AC791N chip as the FM-1, a different panel). X0X turns the instrument into a groovebox: a **909**, an
 **808**, two **303s** with the TB-3PO line generator, and a **breakbeat player**, all playing at once, with
 a shared reverb, tape delay and master compressor.
@@ -13,7 +13,7 @@ Unofficial: not affiliated with or endorsed by M-Vave or the X0X author.
 
 Everything about X0X itself (the parts, patterns, song, motion, the screens, the manual) is X0X's: read
 the upstream [README-UPSTREAM.md](README-UPSTREAM.md) and the [manual](docs/MANUAL.md). This page covers
-what is different on the SMK-37 Pro.
+what is different on the SMK-37.
 
 ## Credits
 
@@ -23,12 +23,12 @@ what is different on the SMK-37 Pro.
   (after the Phazerville TB_3PO applet) and BB Gen (mestela); see [LICENSING.md](LICENSING.md).
 - **Felucca** by Leo Kuroshita (Hügelton Instruments): <https://github.com/hugelton/Felucca>, the FM-1
   platform X0X is built on (hardware layer, USB, update loader, storage).
-- **SMK-37 Pro board layer**: the board patch series of [Snoop37](https://github.com/genkigenki/Snoop37)
+- **SMK-37 board layer**: the board patch series of [Snoop37](https://github.com/genkigenki/Snoop37)
   (branch `smk37-board`), and the porting guide
   [genkigenki/fm1-to-smk37](https://github.com/genkigenki/fm1-to-smk37) (hardware facts, flash map, update
   path, backup and recovery). Port by genkigenki.
 
-## What changed for the SMK-37 Pro
+## What changed for the SMK-37
 
 Every change is behind one build switch, `BOARD_SMK37` (`BOARD=smk37`). The normal FM-1 build of this
 tree is byte for byte the same as upstream X0X's (`build/x0x.bin`, `build/loader/ota.bin`,
@@ -46,14 +46,14 @@ tree is byte for byte the same as upstream X0X's (`build/x0x.bin`, `build/loader
 - X0X's user interface (`firmware/src/app/ui.c`) is unchanged; the SMK controls are mapped onto the
   FM-1's (below).
 
-## Controls on the SMK-37 Pro
+## Controls on the SMK-37
 
-The SMK-37 Pro's controls stand in for the FM-1's, so X0X's manual applies as written. Read the FM-1 name
+The SMK-37's controls stand in for the FM-1's, so X0X's manual applies as written. Read the FM-1 name
 in the manual, press the SMK control in the right-hand column.
 
 ### Keys and pads
 
-| SMK-37 Pro | X0X (FM-1 name) | What it does in X0X |
+| SMK-37 | X0X (FM-1 name) | What it does in X0X |
 |---|---|---|
 | Keys F3 to G5 (the middle 27) | the FM-1's 27 keys | White keys: steps (HOME: patterns). Black keys: drum tracks, break slices (HOME: part mutes). With REC on a 303: a keyboard. |
 | 16 pads | the 16 white keys | The steps 1-16 of the page (HOME: patterns). Top row = steps 1-8, bottom row = 9-16 (a 303 with REC, a keyboard: the low notes on the bottom row). A pad sets the same key as the keybed's white key. |
@@ -65,7 +65,7 @@ mutes) is shown on the screen only.
 
 ### Buttons
 
-| SMK-37 Pro button | X0X (FM-1 name) | What it does in X0X |
+| SMK-37 button | X0X (FM-1 name) | What it does in X0X |
 |---|---|---|
 | PATCH | HOME | The pattern (again: the song); in a list: back; a question: no |
 | SEQ | SEQ | The part's steps (again: next page) |
@@ -88,7 +88,7 @@ Button lights are on or off (the SMK has no dim level, so X0X's "glow" setting h
 
 ### Knobs, faders, wheels
 
-| SMK-37 Pro | X0X (FM-1 name) | What it does in X0X |
+| SMK-37 | X0X (FM-1 name) | What it does in X0X |
 |---|---|---|
 | K1 | MASTER | Volume (a knob here, not a pot: it starts at the FM-1's power-on level) |
 | K2 | SELECT | Page; list row; PATCH held + K2: tempo |
@@ -127,7 +127,7 @@ tools/get_toolchain.sh                 # the JieLi toolchain, once
 ./build.sh                             # FM-1: build/x0x.fwsc (identity FM-1_900), unchanged from upstream
 BOARD=smk37 ./build.sh                 # SMK-37 Pro: build/x0x-smk37.fwsc (identity SMK-37 Pro_900)
 BOARD=smk37 ./build.sh --release 0.1   # a release: build/x0x-smk37-0.1.fwsc
-tests/run_tests.sh                     # X0X's tests plus the SMK-37 Pro board tests
+tests/run_tests.sh                     # X0X's tests plus the SMK-37 board tests
 ```
 
 Build options for the SMK: `FELUCCA_DATA_FAMILY` (default `X0X`) and `FELUCCA_DATA_UNTAGGED_OK` (default
@@ -159,7 +159,7 @@ before you install anything.
    guard, and the update loader writes only the app area. What X0X37 writes: the app `0x04000-0x9CFFF`
    (through the update loader), its store `0x9D000-0xAEFFF` and the store owner tag `0xAF000`, the update
    staging `0xBB000-0xBFFFF`, and the two sample slots `0xC2000-0xE9FFF`.
-3. **Store owner.** Several FM-1 firmwares are ported to the SMK-37 Pro with this same board layer and
+3. **Store owner.** Several FM-1 firmwares are ported to the SMK-37 with this same board layer and
    the same store area. X0X37 tags its store as `X0X`; at power-on a store written by another port, or an
    untagged one, is **erased** before X0X37 reads it (the screen says OLD DATA CLEARED). Save what you
    want to keep from another firmware before you install X0X37. Samples, calibration, Bluetooth pairing
@@ -176,14 +176,14 @@ python3 tools/fm1_install.py --info                      # the connected keyboar
 python3 tools/fm1_install.py build/x0x-smk37.fwsc        # install; the keyboard restarts into X0X37
 ```
 
-The installer only sends an SMK package to an SMK-37 Pro (and an FM-1 package to an FM-1). X0X's web
+The installer only sends an SMK package to an SMK-37 (and an FM-1 package to an FM-1). X0X's web
 installer and break-loop page are made for the FM-1 and are not adapted. If an install is cut off,
 power-cycle the keyboard and run the same command again: the update loader resumes.
 
 **Break loops**: the SMK has **two** user sample slots (the FM-1 has three); upload with
 `tools/upload_breaks.py --slots 1,2 ...` (slot 3 is refused).
 
-**Roll back** to the stock firmware: install M-Vave's official SMK-37 Pro package, either with M-Vave's
+**Roll back** to the stock firmware: install M-Vave's official package for your model, either with M-Vave's
 updater or with `python3 tools/fm1_install.py --force OFFICIAL.fwsc` (`--force`: it has no X0X loader;
 the installer handles its 36-block layout). Your calibration is untouched. The stock firmware then finds
 X0X37's data in its VM and sample areas; for a clean state write those ranges back from your backup, or
@@ -199,6 +199,6 @@ None of these steps has been tried with X0X37 on a real unit yet.
 ## License
 
 GPL-3.0-only, as X0X and Felucca: see [LICENSE](LICENSE) and [LICENSING.md](LICENSING.md) (the origin
-and license of every part). The SMK-37 Pro changes are under the same license. This repository contains
-no stock firmware, no flash dumps and no vendor code: the official SMK-37 Pro firmware comes from
+and license of every part). The SMK-37 changes are under the same license. This repository contains
+no stock firmware, no flash dumps and no vendor code: the official SMK-37 firmware comes from
 M-Vave, and the JieLi toolchain and SDK files are downloaded by the build tools.
