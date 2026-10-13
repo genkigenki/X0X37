@@ -1,7 +1,11 @@
 # X0X37: X0X for the M-Vave SMK-37
 
-**X0X37** is a port of **X0X**, the groovebox firmware for the M-Vave FM-1 by
-[Charles Vestal](https://github.com/charlesvestal/fm1-x0x), to the **M-Vave SMK-37** keyboard (SMK-37 Pro, Elite or MKE-P37; same
+> Unofficial SMK-37 build of [X0X](https://github.com/charlesvestal/fm1-x0x) by **Charles Vestal**. Offered
+> upstream as [charlesvestal/fm1-x0x#13](https://github.com/charlesvestal/fm1-x0x/pull/13); once merged, use the
+> original project and this repo will be archived. All credit to Charles Vestal.
+
+This is **X0X**, the groovebox firmware for the M-Vave FM-1 by
+[Charles Vestal](https://github.com/charlesvestal/fm1-x0x), built for the **M-Vave SMK-37** keyboard (SMK-37 Pro, Elite or MKE-P37; same
 JieLi AC791N chip as the FM-1, a different panel). X0X turns the instrument into a groovebox: a **909**, an
 **808**, two **303s** with the TB-3PO line generator, and a **breakbeat player**, all playing at once, with
 a shared reverb, tape delay and master compressor.
@@ -26,7 +30,7 @@ what is different on the SMK-37.
 - **SMK-37 board layer**: the board patch series of [Snoop37](https://github.com/genkigenki/Snoop37)
   (branch `smk37-board`), and the porting guide
   [genkigenki/fm1-to-smk37](https://github.com/genkigenki/fm1-to-smk37) (hardware facts, flash map, update
-  path, backup and recovery). Port by genkigenki.
+  path, backup and recovery).
 
 ## What changed for the SMK-37
 
